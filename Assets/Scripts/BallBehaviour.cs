@@ -21,7 +21,9 @@ namespace minigame
         void Update()
         {
             Vector3 axis = new Vector3(XRotation, YRotation, ZRotation);
-            transform.Rotate(axis, DegreesPerSecond * Time.deltaTime);
+            transform.RotateAround(Vector3.zero ,axis, DegreesPerSecond * Time.deltaTime);
+            // Debug.DrawRay(Vector3.zero, axis, Color.yellow, .5f);
+
         }
     }
 }
