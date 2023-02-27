@@ -8,6 +8,7 @@ namespace minigame
     public class GameController : MonoBehaviour
     {
         public GameObject OneBallPrefab;
+        public int Score = 0;
 
         // Start is called before the first frame update
         void Start()
@@ -19,6 +20,18 @@ namespace minigame
         void Update()
         {
             Instantiate(OneBallPrefab);
+        }
+
+        public void ClickedOnBall()
+        {
+            Score++;
+        }
+
+        private void OnMouseDown()
+        {
+            GameController controller = Camera.main.GetComponent<GameController>();
+            controller.ClickedOnBall();
+            Destroy(gameObject);
         }
     }
 
