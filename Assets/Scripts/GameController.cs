@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 namespace minigame
 {
@@ -9,9 +11,11 @@ namespace minigame
     {
         public GameObject OneBallPrefab;
         public int Score = 0;
-        public bool Gameover = false;
+        public bool Gameover = true;
         public int NumberOfBalls = 0;
         public int MaximumBalls = 15;
+        public TextMeshProUGUI ScoreText;
+        public Button PlayAgainButton;
 
         // Start is called before the first frame update
         void Start()
@@ -22,7 +26,8 @@ namespace minigame
         // Update is called once per frame
         void Update()
         {
-            Instantiate(OneBallPrefab);
+            // Instantiate(OneBallPrefab);
+            ScoreText.text = Score.ToString();
         }
 
         public void ClickedOnBall()
@@ -31,12 +36,6 @@ namespace minigame
             NumberOfBalls--;
         }
 
-        private void OnMouseDown()
-        {
-            GameController controller = Camera.main.GetComponent<GameController>();
-            controller.ClickedOnBall();
-            Destroy(gameObject);
-        }
 
         public void AddABall()
         {
@@ -47,13 +46,21 @@ namespace minigame
                 if(NumberOfBalls >= MaximumBalls)
                 {
                     Gameover = true;
+                    PlayAgainButton.gameObject.SetActive(true);
                 }
             }
         }
 
         public void StartGame()
         {
-
+            foreach (GameObject ball in GameObject.FindGameObjectsWithTag("GameController"))
+            {
+                Destroy(ball);
+            }
+            PlayAgainButton.gameObject.SetActive(false);
+            Score = 0;
+            NumberOfBalls = 0;
+            Gameover = false;
         }
     }
 
