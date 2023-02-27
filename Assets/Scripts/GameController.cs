@@ -9,6 +9,9 @@ namespace minigame
     {
         public GameObject OneBallPrefab;
         public int Score = 0;
+        public bool Gameover = false;
+        public int NumberOfBalls = 0;
+        public int MaximumBalls = 15;
 
         // Start is called before the first frame update
         void Start()
@@ -25,6 +28,7 @@ namespace minigame
         public void ClickedOnBall()
         {
             Score++;
+            NumberOfBalls--;
         }
 
         private void OnMouseDown()
@@ -32,6 +36,24 @@ namespace minigame
             GameController controller = Camera.main.GetComponent<GameController>();
             controller.ClickedOnBall();
             Destroy(gameObject);
+        }
+
+        public void AddABall()
+        {
+            if(!Gameover)
+            {
+                Instantiate(OneBallPrefab);
+                NumberOfBalls++;
+                if(NumberOfBalls >= MaximumBalls)
+                {
+                    Gameover = true;
+                }
+            }
+        }
+
+        public void StartGame()
+        {
+
         }
     }
 

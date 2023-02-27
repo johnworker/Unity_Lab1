@@ -24,6 +24,17 @@ namespace minigame
         {
 
         }
+
+        void OnMouseDown()
+        {
+            GameController controller = Camera.main.GetComponent<GameController>();
+            if (!controller.Gameover)
+            {
+                controller.ClickedOnBall();
+                Destroy(gameObject);
+            }
+        }
+
     }
 
 }
